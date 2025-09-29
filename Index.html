@@ -1,0 +1,162 @@
+<!-- File: index.html -->
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sommaire — Page simple</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Sommaire</h1>
+    <p class="lead">Une page simple contenant un sommaire avec un menu déroulant.</p>
+  </header>
+
+  <nav class="toc">
+    <ul>
+      <li><a href="#intro">Introduction</a></li>
+      <li class="dropdown">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Chapitre 1 ▾</button>
+        <ul class="dropdown-content" aria-label="Sous-menu Chapitre 1">
+          <li><a href="#ch1-1">1.1 — Contexte</a></li>
+          <li><a href="#ch1-2">1.2 — Objectifs</a></li>
+          <li><a href="#ch1-3">1.3 — Résumé</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Chapitre 2 ▾</button>
+        <ul class="dropdown-content" aria-label="Sous-menu Chapitre 2">
+          <li><a href="#ch2-1">2.1 — Méthode</a></li>
+          <li><a href="#ch2-2">2.2 — Résultats</a></li>
+        </ul>
+      </li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="intro">
+      <h2>Introduction</h2>
+      <p>Texte d'introduction...</p>
+    </section>
+
+    <section id="ch1-1">
+      <h2>1.1 — Contexte</h2>
+      <p>Contenu du contexte...</p>
+    </section>
+
+    <section id="ch1-2">
+      <h2>1.2 — Objectifs</h2>
+      <p>Contenu des objectifs...</p>
+    </section>
+
+    <section id="ch1-3">
+      <h2>1.3 — Résumé</h2>
+      <p>Résumé du chapitre 1...</p>
+    </section>
+
+    <section id="ch2-1">
+      <h2>2.1 — Méthode</h2>
+      <p>Contenu de la méthode...</p>
+    </section>
+
+    <section id="ch2-2">
+      <h2>2.2 — Résultats</h2>
+      <p>Contenu des résultats...</p>
+    </section>
+
+    <section id="conclusion">
+      <h2>Conclusion</h2>
+      <p>Texte de conclusion...</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 — Exemple de sommaire</p>
+  </footer>
+
+  <script>
+    // Petit script pour basculer l'attribut aria-expanded (améliore accessibilité)
+    document.querySelectorAll('.dropbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+/* File: styles.css */
+/* Sauvegardez ce morceau dans styles.css à côté de index.html */
+
+:root{
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --accent:#2b6cb0;
+  --muted:#6b7280;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+header{background:linear-gradient(90deg, #eef2ff 0%, #fff 100%);padding:1.5rem;border-bottom:1px solid #e6eef8}
+header h1{margin:0;font-size:1.5rem}
+.lead{margin:0.25rem 0 0;color:var(--muted)}
+
+.toc{padding:1rem;max-width:720px;margin:1rem auto}
+.toc ul{list-style:none;padding:0;margin:0;display:flex;gap:0.5rem;flex-wrap:wrap}
+.toc a{display:block;padding:0.45rem 0.75rem;border-radius:8px;text-decoration:none;color:var(--accent);font-weight:600}
+
+.toc .dropdown{position:relative}
+.dropbtn{background:var(--card);border:1px solid #e6eef8;padding:0.45rem 0.75rem;border-radius:8px;cursor:pointer;font-weight:600}
+.dropbtn[aria-expanded="true"]{box-shadow:0 6px 18px rgba(43,108,176,0.08)}
+
+.dropdown-content{
+  position:absolute;
+  left:0;
+  top:calc(100% + 8px);
+  min-width:220px;
+  background:var(--card);
+  border:1px solid #e6eef8;
+  border-radius:8px;
+  padding:0.35rem 0;
+  box-shadow:0 12px 30px rgba(2,6,23,0.06);
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-6px);
+  transition:opacity 160ms ease, transform 160ms ease;
+  z-index:10;
+}
+
+/* show on hover and when button has aria-expanded */
+.dropdown:hover .dropdown-content,
+.dropbtn[aria-expanded="true"] + .dropdown-content{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+.dropdown-content li{padding:0}
+.dropdown-content a{padding:0.5rem 0.75rem;display:block;color:#0f172a;text-decoration:none}
+.dropdown-content a:hover{background:#f1f5f9}
+
+main{max-width:720px;margin:1rem auto;padding:0 1rem}
+section{background:var(--card);border:1px solid #e6eef8;padding:1rem;border-radius:10px;margin-bottom:1rem}
+section h2{margin-top:0}
+
+footer{text-align:center;padding:1rem;color:var(--muted)}
+
+/* responsive */
+@media (max-width:560px){
+  .toc ul{flex-direction:column}
+  .dropdown-content{left:auto;right:0;min-width:180px}
+}
